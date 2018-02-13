@@ -4,6 +4,12 @@ class LinebotController < ApplicationController
   # callbackアクションのCSRFトークン認証を無効
   protect_from_forgery :except => [:callback]
 
+  replies = [
+  	"クソ！", 
+  	"クソだな", 
+  	"クソかよ"
+  ]
+
   def client
     @client ||= Line::Bot::Client.new { |config|
       config.channel_secret = ENV["LINE_CHANNEL_SECRET"]
@@ -32,7 +38,7 @@ class LinebotController < ApplicationController
 			# }
 			message = {
 				type: 'text',
-				text: 'クソだな'
+				text: replies[0]
 			}
 			client.reply_message(event['replyToken'], message)
         end
