@@ -1,3 +1,5 @@
 Rails.application.routes.draw do
-  post '/callback' => 'linebot#callback'
+	root to: 'home#index'
+	# get 'home/index'
+	post '/callback' => 'linebot#callback'
 end
