@@ -4,7 +4,7 @@ class LinebotController < ApplicationController
   # callbackアクションのCSRFトークン認証を無効
   protect_from_forgery :except => [:callback]
 
-  replies = [
+  @@replies = [
   	"クソ！", 
   	"クソだな", 
   	"クソかよ"
@@ -38,7 +38,7 @@ class LinebotController < ApplicationController
 			# }
 			message = {
 				type: 'text',
-				text: replies[0]
+				text: @@replies[0]
 			}
 			client.reply_message(event['replyToken'], message)
         end
