@@ -7,6 +7,12 @@ class LinebotController < ApplicationController
   @@replies = [
   	"クソ！", 
   	"クソだな", 
+  	"クソ。。。", 
+  	"クソだろ", 
+  	"クソか！", 
+  	"クソぉぉぉ！", 
+  	"そな、クソな", 
+  	"クソなんだな", 
   	"クソかよ"
   ]
 
@@ -32,13 +38,15 @@ class LinebotController < ApplicationController
       when Line::Bot::Event::Message
         case event.type
         when Line::Bot::Event::MessageType::Text
+        	random = Random.new
+			idx = random.rand(@@replies.length)
 			# message = {
 			# 	type: 'text',
 			# 	text: event.message['text']
 			# }
 			message = {
 				type: 'text',
-				text: @@replies[0]
+				text: @@replies[idx]
 			}
 			client.reply_message(event['replyToken'], message)
         end
